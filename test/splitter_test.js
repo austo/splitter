@@ -58,4 +58,15 @@ suite('splitter', () => {
       invalid: 1
     }, result);
   });
+
+  test('should validate enums correctly with extra spaces', () => {
+    var splitter = new Splitter('enumeration', enums);
+    // inspect(splitter._enumIds);
+    var result = splitter.validate(`ACCOMACK, Virginia\tADA, Idaho\t17001\tdog`,
+      ['NEWLINE', 'TABULATOR']);
+    assert.deepEqual({
+      valid: 3,
+      invalid: 1
+    }, result);
+  });
 });

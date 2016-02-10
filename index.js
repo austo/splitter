@@ -47,8 +47,11 @@ Splitter.prototype.validate = function(input, delimiters) {
   // var self = this;
   var re = this._makeRegExp(delimiters),
     valid = 0,
-    invalid = 0;
-  input.split(re).forEach((s) => {
+    invalid = 0,
+    parts = input.split(re);
+
+  // console.log(parts);
+  parts.forEach((s) => {
     if (this.isEnum) {
       var map = isNaN(s) ? this._enumIds : this._enumNames;
       if (map[s] === undefined) {
