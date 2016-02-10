@@ -5,11 +5,11 @@ const types = {
   ENUMERATION: null,
   BOOLEAN: /^(?:(?:true)|(?:false)|0|1)$/,
   FLOAT: /^-?[1-9][0-9]*(?:.[0-9]*)?$/,
-  DATE: /[1-2][0-9]{3}[\.-][0-9]{2}[\.-][0-9]{2}\.?$/,
+  DATE: /^[1-2][0-9]{3}[\.-][0-9]{2}[\.-][0-9]{2}\.?$/,
   STRING: /.*/,
   MULTI_ENUM: null,
   WIDESTRING: /.*/,
-  DATE_AND_TIME: /^[1-2][0-9]{3}[\.-][0-9]{2}[\.-][0-9]{2}\.?\s(?:[0-9]{2}:){2}(?::[0-9]{2})?$/
+  DATE_AND_TIME: /^[1-2][0-9]{3}[\.-][0-9]{2}[\.-][0-9]{2}\.?\s(?:[0-9]{2}:){2}(?:[0-9]{2})?$/
 };
 
 function Splitter(type, enums) {
@@ -23,7 +23,7 @@ function Splitter(type, enums) {
     throw new RangeError('invalid type');
   }
 
-  if (type === 'ENUMERATION') {
+  if (type === 'ENUMERATION' || type === 'MULTI_ENUM') {
     if (!Array.isArray(enums)) {
       throw new RangeError('ENUMERATION type splitter must be initialized with enums array');
     }
